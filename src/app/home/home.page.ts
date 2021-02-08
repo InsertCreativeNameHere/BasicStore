@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+
+
+  slidesIni = [1,1,1,1,1,1,1,1,1,1];
+  promos = [1,1,1,1,1,1,1,1,1,1]
   constructor() {}
 
 }
