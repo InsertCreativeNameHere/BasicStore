@@ -13,8 +13,14 @@
       <ion-button slot="icon-only">
         <ion-label>Promociones</ion-label>
       </ion-button>
-      <ion-button slot="icon-only">
+      <ion-button *ngIf="!token" (click)="iniciarSesion()" slot="icon-only">
         <ion-label>Ingresar</ion-label>
+      </ion-button>
+      <ion-button *ngIf="token" (click)="perfil()" slot="icon-only">
+        <ion-label>{{ token.nombre }}</ion-label>
+      </ion-button>
+      <ion-button *ngIf="token" (click)="cerrarSesion()" slot="icon-only">
+        <ion-label>Cerra sesion</ion-label>
       </ion-button>
       <ion-button slot="icon-only">
         <ion-icon name="cart-outline"></ion-icon>
@@ -76,18 +82,28 @@
           </h2>
           <img style="padding-left: 50px;" src="../../assets/img/defecto.png">
         </div>
-        <form>
+        <form #formularioRegistro="ngForm" (ngSubmit)="registrarUsuario()">
           <ion-list>
             <ion-item>
               <ion-label position="floating">Nombre:</ion-label>
-              <ion-input></ion-input>
+              <ion-input 
+              name="nombre"
+              [(ngModel)] = "usuario.nombre"
+              required
+              ></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Correo Electronico:</ion-label>
-              <ion-input></ion-input>
+              <ion-input
+
+              name="email"
+              pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+              [(ngModel)] = "usuario.email"
+              required
+              ></ion-input>
             </ion-item>
             <div align="center">
-              <ion-button>
+              <ion-button type="submit" [disabled]="formularioRegistro.invalid">
                 Siguiente
               </ion-button>
             </div>
